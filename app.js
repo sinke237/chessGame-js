@@ -40,10 +40,10 @@ for (let i = 0; i < 64; i++) {
     const col = i % 8;
     if ((row + col) % 2 === 0) {
         // color the square beige if the sum of the row and column is even
-      square.classList.add('beige');
+        square.classList.add('beige');
     } else {
         // color the square brown if the sum of the row and col is odd
-      square.classList.add('brown');
+        square.classList.add('brown');
     }
   
     // Append the square to the game board
@@ -51,8 +51,17 @@ for (let i = 0; i < 64; i++) {
   
     // Add piece to the square if available
     if (startPieces[i]) {
-      square.innerHTML = startPieces[i];
+        square.innerHTML = startPieces[i];
     }
-  }
-  
+    // Now we color the svgs to make a distinction between the players
+    // We define the color styles in the stylesheet and append the classes to the svgs
+
+    if(i <= 15){
+        square.firstChild.firstChild.classList.add('black');
+    }
+    if(i >= 48){
+        square.firstChild.firstChild.classList.add('white');
+    }
+}
+
 
