@@ -27,16 +27,22 @@ const startPieces = [
 // we place each piece inside a square div then inject
 // all the square divs inside the #gameboard div
 
+// creating gameboard
 for (let i = 0; i < 64; i++) {
     const square = document.createElement('div');
     square.classList.add('square');
   
     // Set background color based on row and column indexes
+
+    // Dividing i by num of cols to get the row
     const row = Math.floor(i / 8);
+    // calculates the index of the square.
     const col = i % 8;
     if ((row + col) % 2 === 0) {
+        // color the square beige if the sum of the row and column is even
       square.classList.add('beige');
     } else {
+        // color the square brown if the sum of the row and col is odd
       square.classList.add('brown');
     }
   
