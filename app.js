@@ -31,6 +31,7 @@ const startPieces = [
 for (let i = 0; i < 64; i++) {
     const square = document.createElement('div');
     square.classList.add('square');
+    square.setAttribute('square-id', i);
   
     // Set background color based on row and column indexes
 
@@ -71,3 +72,23 @@ for (let i = 0; i < 64; i++) {
     }
 }
 
+// But we want to drag every square because we playing, we should
+// be able to move the svgs from one place to another.
+
+const allSquares = document.querySelectorAll('.square');
+
+// we add a dragstart event listener to all the squares
+allSquares.forEach(square => {
+    // this event listener calls a function dragStart
+    square.addEventListener('dragstart', dragStart);
+});
+
+// when we drag, we drag from one index and drop on another index
+// we have to track these indices and the element we drag.
+
+let startPositionID;
+let draggedElement;
+function dragStart(e){
+    startPositionID = e.target.parentNode.getAttribute('square-id');
+    draggedElement = e.target;
+}
