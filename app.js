@@ -104,6 +104,11 @@ function dragOver(e){
     e.preventDefault();
 }
 
+// we need to track which player's turn is it to player
+// we set it to black so the player to player first is black
+let playerGo = 'black';
+playerDisplay.textContent = 'black';
+
 // Function to track where we drop.
 // with the styles in the stylessheet, we will be
 // dragging the piece and dropping into the squares
@@ -112,12 +117,21 @@ function dragDrop(e){
     // we want to know it a square already contains a piece
     const taken = e.target.classList.contains('piece');
 
-    // we need to track which player's turn is it to player
-    // we set it to black so the player to player first is black
-    let playerGo = 'black';
-
     // we let the user know about this 
     playerDisplay.textContent = 'black';
 
     // after black has played we need to change player.
+    changePlayer();
+}
+
+// Function to change player
+function changePlayer(){
+    if(playerGo === "black"){
+        playerGo = "white";
+        playerDisplay.textContent = 'white';
+    }
+    else{
+        playerGo = "black";
+        playerDisplay.textContent = 'black';
+    }
 }
