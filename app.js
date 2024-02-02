@@ -129,9 +129,31 @@ function changePlayer(){
     if(playerGo === "black"){
         playerGo = "white";
         playerDisplay.textContent = 'white';
+        reverseIDs();
     }
     else{
         playerGo = "black";
         playerDisplay.textContent = 'black';
+        reverseIDs();
     }
+}
+
+// Now we revert the indices. When black player is player,
+// index starts from 0, from the first king of black player.
+// when white player is playing the index should change and start
+// from 0 of first king of white player.
+
+function reverseIDs(){
+    const allSquares = document.querySelectorAll('.square');
+    allSquares.forEach((square, i) => {
+        square.setAttribute('square-id', (width*width - 1) - i);
+    });
+}
+
+// After reversing to the white player, we need to revert back for the black player
+function revertIDs(){
+    const allSquares = document.querySelectorAll('.square');
+    allSquares.forEach((square, i) => {
+        square.setAttribute('square-id', i);
+    });
 }
