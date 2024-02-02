@@ -52,6 +52,13 @@ for (let i = 0; i < 64; i++) {
     // Add piece to the square if available
     if (startPieces[i]) {
         square.innerHTML = startPieces[i];
+
+        // We add the drag and drop functionality
+        // All the squares that should be draggable at this point should 
+        // have a first child to indicate it has an svg that we want to drag.
+        // we add a draggable attribute to it and set it to be true.
+
+        square.firstChild.setAttribute('draggable', true);
     }
     // Now we color the svgs to make a distinction between the players
     // We define the color styles in the stylesheet and append the classes to the svgs
@@ -63,5 +70,4 @@ for (let i = 0; i < 64; i++) {
         square.firstChild.firstChild.classList.add('white');
     }
 }
-
 
