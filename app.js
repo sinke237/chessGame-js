@@ -81,6 +81,10 @@ const allSquares = document.querySelectorAll('.square');
 allSquares.forEach(square => {
     // this event listener calls a function dragStart
     square.addEventListener('dragstart', dragStart);
+    // dragover functionality
+    square.addEventListener('dragover', dragOver);
+    // eventlister for the drop function
+    square.addEventListener('drop', dragDrop);
 });
 
 // when we drag, we drag from one index and drop on another index
@@ -88,7 +92,32 @@ allSquares.forEach(square => {
 
 let startPositionID;
 let draggedElement;
+
+// Function to track where we start dragging from
 function dragStart(e){
     startPositionID = e.target.parentNode.getAttribute('square-id');
     draggedElement = e.target;
+}
+
+// Funtion to prevent things from going wrong when dragging over
+function dragOver(e){
+    e.preventDefault();
+}
+
+// Function to track where we drop.
+// with the styles in the stylessheet, we will be
+// dragging the piece and dropping into the squares
+function dragDrop(e){
+    e.stopPropagation(); // prevent misbehaviours
+    // we want to know it a square already contains a piece
+    const taken = e.target.classList.contains('piece');
+
+    // we need to track which player's turn is it to player
+    // we set it to black so the player to player first is black
+    let playerGo = 'black';
+
+    // we let the user know about this 
+    playerDisplay.textContent = 'black';
+
+    // after black has played we need to change player.
 }
