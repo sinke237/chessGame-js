@@ -104,5 +104,12 @@ function dragDrop(e) {
 }
 
 function changePlayer() {
-    
+    if (playerGo === 'black') {
+        playerGo = 'white';
+        playerDisplay.textContent = 'white';
+    }
+    else {
+        playerGo = 'black';
+        playerDisplay.textContent = 'black';
+    }
 }
