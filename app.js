@@ -50,3 +50,13 @@ function createBoard() {
     });
 }
 createBoard();
+
+const allSquares = document.querySelectorAll('.square');
+// we add events listeners to the square
+// we drag from a starter index and drop on another index
+// we need to track all of that.
+allSquares.forEach(square => {
+    square.addEventListener('dragstart', dragStart);
+    console.log(square);
+});
+
