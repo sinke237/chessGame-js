@@ -57,6 +57,21 @@ const allSquares = document.querySelectorAll('.square');
 // we need to track all of that.
 allSquares.forEach(square => {
     square.addEventListener('dragstart', dragStart);
-    console.log(square);
+
 });
 
+// elements to help us track drag and drop functionality
+
+let startPositionID;
+let draggedElement;
+
+function dragStart(e) {
+    // sets the startPositionID = square-id of the square we drag
+    startPositionID = e.target.parentNode.getAttribute('square-id');
+    
+    // this tracks the div that is being dragged
+    draggedElement = e.target;
+    
+}
+
+// prevent misbehaviour during dra
