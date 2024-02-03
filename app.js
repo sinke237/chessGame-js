@@ -96,11 +96,45 @@ function dragOver(e) {
 function dragDrop(e) {
     e.stopPropagation(); // to prevet misbehaviour
 
+    // we need to make sure that when e.g it is the player to player
+    // the black player should only drag an svg with a black class.
+    const correctGo = draggedElement.firstChild.classList.contains(playerGo);
+
     // we have to know that square that already has a piece in it.
     const taken = e.target.classList.contains('piece');
 
-    // our function to change player
-    changePlayer();
+    // we define the opponentGo by changing the previous value of playerGo
+    const opponentGo = playerGo === 'white' ? 'black' : 'white';
+
+    // we define what has been taken by the opponent by tracking
+    // what the opponent owns.
+    const takenByOpponent = e.target.firstChild?.classList.contains(opponentGo);
+    console.log(takenByOpponent);
+
+    if (correctGo) {
+        // allow you place piece on already occupied squares
+        if (takenByOpponent && valid) {
+            // drops dragged element to drop point
+            e.target.parentNode.append(draggedElement);
+            // removes the dragged element from the drag start position
+            e.target.remove();
+            // our function to change player
+            changePlayer();
+            return 
+        }
+        // where you can not place a piece
+        if (taken && !takenByOpponent) {
+            infoDisplay.textContent = "You cannot go here!";
+            setTimeout(() => infoDisplay.textContent = '', 2000);
+            return 
+        }
+        // place piece on empty squares
+        if (valid) {
+            e.target.append(draggedElement);
+            changePlayer();
+            return 
+        }
+    }
 
 }
 
