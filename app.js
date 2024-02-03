@@ -154,7 +154,14 @@ function dragDrop(e){
 
 }
 
+function checkIfValid(target) {
+    // get the square id where a piece has been drop
+    const targetID = Number(target.getAttribute('square-id') || target.parentNode.getAttribute('square-id'));
+    const startID = Number(startPositionID);
+    const piece = draggedElement;
 
+    // we make sure the moves are valid
+}
 
 // Function to change player
 function changePlayer(){
