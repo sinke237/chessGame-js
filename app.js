@@ -101,15 +101,44 @@ function dragDrop(e) {
 
     // our function to change player
     changePlayer();
+
 }
 
 function changePlayer() {
     if (playerGo === 'black') {
         playerGo = 'white';
         playerDisplay.textContent = 'white';
+
+        // after the first player(black) drops, the indices have to change
+        // such that the index zero will be on the last king of the white player
+        // and when it is black player's turn to play
+        // the index has to change so its first king has index 0.
+
+        reverseIDs();
     }
     else {
         playerGo = 'black';
         playerDisplay.textContent = 'black';
+
+        revertIDs();
     }
+}
+
+// after the first player(black) drops, the indices have to change
+// such that the index zero will be on the last king of the white player
+// and when it is black player's turn to play
+// the index has to change so its first king has index 0.
+
+// this will reverse the indices after the black(default) player plays
+function reverseIDs() {
+    const allSquares = document.querySelectorAll('.square');
+    allSquares.forEach((square, i) => {
+        square.setAttribute('square-id', (width*width - 1) - i);
+    });
+}
+
+// this will revert the indices to the default.
+function revertIDs() {
+    const allSquares = document.querySelectorAll('.square');
+    allSquares.forEach((square, i) => square.setAttribute('square-id', i))
 }
