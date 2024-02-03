@@ -161,6 +161,22 @@ function checkIfValid(target) {
     const piece = draggedElement;
 
     // we make sure the moves are valid
+
+    switch (piece) {
+        case 'pawn':
+            const startRow = [8,9,10,11,12,13,14,15];
+            if (
+                startRow.includes(startID) && startID + width * 2 === targetID ||
+                startID + width === targetID ||
+                startID + width - 1 === targetID && document.querySelector(`[square-id = "${startID + width - 1}"]`).firstChild ||
+                startID + width + 1 === targetID && document.querySelector(`[square-id = "${startID + width + 1}"]`).firstChild
+            ) {
+                return true
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 // Function to change player
