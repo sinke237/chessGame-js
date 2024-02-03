@@ -103,6 +103,8 @@ function dragDrop(e) {
     // we have to know that square that already has a piece in it.
     const taken = e.target.classList.contains('piece');
 
+    const valid = checkIfValid(e.target);
+
     // we define the opponentGo by changing the previous value of playerGo
     const opponentGo = playerGo === 'white' ? 'black' : 'white';
 
@@ -136,6 +138,17 @@ function dragDrop(e) {
         }
     }
 
+}
+
+function checkIfValid(target) {
+    // get the square-id when you drop a piece
+    const targetID = Number(target.getAttribute('square-id')) 
+                        || Number(target.parentNode.getAttribute('square-id'));
+    const startID = Number(startPositionID);
+    const piece = startID.id;
+    console.log(targetID);
+    console.log(startID);
+    console.log(piece);
 }
 
 function changePlayer() {
