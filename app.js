@@ -114,15 +114,47 @@ playerDisplay.textContent = 'black';
 // dragging the piece and dropping into the squares
 function dragDrop(e){
     e.stopPropagation(); // prevent misbehaviours
+
+    // We need to make sure the correct player is dragging the correct piece.
+    // so a black player should drag but a piece with black class
+    const correctGo = draggedElement.firstChild.classList.contains(playerGo);
+
     // we want to know it a square already contains a piece
     const taken = e.target.classList.contains('piece');
 
-    // we let the user know about this 
-    playerDisplay.textContent = 'black';
+    const valid = checkIfValid(e.target);
 
-    // after black has played we need to change player.
-    changePlayer();
+    // we define the oppponent turn to player by changing the previour value of playerGo
+    const oppponentGo = playerGo === 'white'?'black':'white';
+
+    // We define what is taken by the opponent to keep what on what each player owns
+    const takenByOpponent = e.target.firstChild?.classList.contains(oppponentGo);
+    
+    if(correctGo){
+        if(takenByOpponent && valid){
+            e.target.parentNode.appendChild(draggedElement);
+            e.target.remove();
+
+            // after black has played we need to change player.
+            changePlayer()
+            return 
+        }
+        if(taken && !takenByOpponent){
+            infoDisplay.textContent = "You cannot go there!";
+            setTimeout(() => {
+                infoDisplay.textContent = '';
+            }, 2000);
+        }
+        if(valid){
+            e.target.appendChild(draggedElement);
+            changePlayer();
+            return
+        }
+    }
+
 }
+
+
 
 // Function to change player
 function changePlayer(){
