@@ -57,7 +57,10 @@ const allSquares = document.querySelectorAll('.square');
 // we need to track all of that.
 allSquares.forEach(square => {
     square.addEventListener('dragstart', dragStart);
-
+    
+    // When we to track the behaviour of elements that the dragged div 
+    // passes over 
+    square.addEventListener('dragover', dragOver);
 });
 
 // elements to help us track drag and drop functionality
@@ -74,4 +77,7 @@ function dragStart(e) {
     
 }
 
-// prevent misbehaviour during dra
+// prevent misbehaviour during dragover event
+function dragOver(e) {
+    e.preventDefault();
+}
