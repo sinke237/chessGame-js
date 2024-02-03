@@ -16,7 +16,7 @@
     cursor: pointer;
     /* to make sure the svg sits on top of the square */
     position: relative;
-    z-index: 9;
+    z-index: -9;
 }
 path {
     position: relative;
