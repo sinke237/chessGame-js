@@ -174,6 +174,20 @@ function checkIfValid(target) {
                 return true
             }
             break;
+        case 'knight':
+            if (
+                startID + width * 2 + 1 === targetID ||
+                startID + width * 2 - 1 === targetID ||
+                startID + width + 2 === targetID ||
+                startID + width - 2 === targetID ||
+                startID - width * 2 + 1 === targetID ||
+                startID - width * 2 - 1 === targetID ||
+                startID - width + 2 === targetID ||
+                startID - width - 2 === targetID  
+            ) {
+                return true
+            }
+
         default:
             break;
     }
