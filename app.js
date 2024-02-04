@@ -111,7 +111,6 @@ function dragDrop(e) {
     // we define what has been taken by the opponent by tracking
     // what the opponent owns.
     const takenByOpponent = e.target.firstChild?.classList.contains(opponentGo);
-    console.log(takenByOpponent);
 
     if (correctGo) {
         // allow you place piece on already occupied squares
@@ -145,10 +144,24 @@ function checkIfValid(target) {
     const targetID = Number(target.getAttribute('square-id')) 
                         || Number(target.parentNode.getAttribute('square-id'));
     const startID = Number(startPositionID);
-    const piece = startID.id;
-    console.log(targetID);
-    console.log(startID);
-    console.log(piece);
+    const piece = draggedElement.id;
+
+    switch (piece) {
+        case 'pawn':
+            const starterRow = [8,9,10,11,12,13,14,15];
+            if (
+                starterRow.includes(startID) && startID + width * 2 === targetID ||
+                startID + width === targetID ||
+                startID + width - 1 === targetID && document.querySelector(`[square-id="${startID + width - 1}"]`).firstChild ||
+                startID + width + 1 === targetID && document.querySelector(`[square-id="${startID + width + 1}"]`).firstChild
+            ) {
+                return true 
+            }
+            break;
+    
+        default:
+            break;
+    }
 }
 
 function changePlayer() {
