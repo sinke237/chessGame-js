@@ -119,6 +119,7 @@ function dragDrop(e) {
             e.target.parentNode.append(draggedElement);
             // removes the dragged element from the drag start position
             e.target.remove();
+            checkForWin();
             // our function to change player
             changePlayer();
             return 
@@ -132,6 +133,7 @@ function dragDrop(e) {
         // place piece on empty squares
         if (valid) {
             e.target.append(draggedElement);
+            checkForWin();
             changePlayer();
             return 
         }
@@ -699,4 +701,25 @@ function reverseIDs() {
 function revertIDs() {
     const allSquares = document.querySelectorAll('.square');
     allSquares.forEach((square, i) => square.setAttribute('square-id', i))
+}
+
+function checkForWin() {
+    // collect all the kings
+    const kings = Array.from(document.querySelectorAll('#king'));
+    // check which king does not contain the class of white
+    if (!kings.some(king => king.firstChild.classList.contains('white'))) {
+        infoDisplay.textContent = 'Black Player wins';
+        
+        // we remove the event listeners from all the squares
+        const allSquares = document.querySelectorAll('.square');
+        allSquares.forEach(square => square.firstChild?.setAttribute('draggable', false));
+    }
+    // if there is not black king then the white player wins
+    if (!kings.some(king => king.firstChild.classList.contains('black'))) {
+        infoDisplay.textContent = 'White Player wins';
+        
+        // we remove the event listeners from all the squares
+        const allSquares = document.querySelectorAll('.square');
+        allSquares.forEach(square => square.firstChild?.setAttribute('draggable', false));
+    }
 }
