@@ -1,17 +1,26 @@
 #gameboard {
-    width: 320px;
-    height: 320px;
+    width: 80vmin; /* 80% of the minimum of the viewport's height and width */
+    height: 80vmin; /* 80% of the minimum of the viewport's height and width */
+    background-color: #f0f0f0; /* Set your desired background color */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-wrap: wrap;
 }
-.square {
-    height: 40px;
-    width: 40px;
-    position: relative;
+p{
+    font-size: 34px;
 }
+.square {
+    width: calc(100% / 8);
+    height: calc(100% / 8);
+    position: relative;
+    float: left;
+  }
 .square svg{
-    height: 30px;
-    width: 30px;
+    height: 60px;
+    width: 60px;
     margin: 5px;
     cursor: pointer;
     /* to make sure the svg sits on top of the square */
